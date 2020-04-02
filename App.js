@@ -1,5 +1,5 @@
 import React from "react";
-import { KeyboardAvoidingView, View } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 import { WebView } from "react-native-webview";
 
 const App = () => {
@@ -8,7 +8,10 @@ const App = () => {
       style={{ width: "100%", height: "100%" }}
       behavior="height"
     >
-      <WebView source={{ uri: "http://192.168.25.51:3000/" }} />
+      <WebView
+        source={{ uri: "http://192.168.0.8:3000" }}
+        style={{ marginTop: 24 }}
+      />
     </KeyboardAvoidingView>
   );
 };
