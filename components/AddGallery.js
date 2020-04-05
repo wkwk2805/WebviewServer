@@ -3,49 +3,83 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   Image,
-  FlatList,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
 import * as MediaLibrary from "expo-media-library";
 import { MediaType } from "expo-media-library";
 import { Video } from "expo-av";
 const AddGallery = () => {
   const [files, setFiles] = useState([]);
+  const [selectFile, setSelectFile] = useState({});
   useEffect(() => {
     (async () => await perm())();
   }, []);
   const perm = async () => {
     const { granted } = await MediaLibrary.requestPermissionsAsync();
     if (granted) {
-      const result = await MediaLibrary.getAssetsAsync({
-        mediaType: [MediaType.photo],
+      const fileList = await MediaLibrary.getAssetsAsync({
+        mediaType: [MediaType.photo, MediaType.video],
+        sortBy: [MediaLibrary.SortBy.modificationTime],
+        first: 150,
+      });
+      setFiles(fileList.assets);
+      const checkFile = await MediaLibrary.getAssetsAsync({
+        mediaType: [MediaType.photo, MediaType.video],
         first: 1,
       });
-      setFiles(result.assets);
+      setSelectFile(checkFile.assets[0]);
     }
   };
 
   return (
-    <View style={{ marginTop: 24, flex: 1 }}>
+    <SafeAreaView style={{ marginTop: 24, flex: 1 }}>
       <View style={{ flex: 1 }}>
-        <Text>a</Text>
+        <Image
+          source={{ uri: selectFile.uri }}
+          style={{ width: "100%", height: "100%" }}
+        />
       </View>
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, flexDirection: "column" }}>
-          {files.map((e, i) => {
-            return (
-              <View style={{ flex: 1 }} key={i}>
-                <Image
-                  source={{ uri: e.uri }}
-                  style={{ width: "100%", height: "100%" }}
-                />
-              </View>
-            );
+        <ScrollView>
+          {files.map((e1, i) => {
+            if (i % 3 === 0) {
+              return (
+                <View key={i} style={{ flex: 1, flexDirection: "row" }}>
+                  {files.map((e2, j) => {
+                    if (i === j || i + 1 === j || i + 2 === j) {
+                      if (e2.mediaType === "video") {
+                        return (
+                          <Video
+                            shouldPlay
+                            volume={0}
+                            isLooping
+                            key={j}
+                            source={{ uri: e2.uri }}
+                            style={{ width: 100, height: 100, flex: 1 }}
+                            resizeMode="stretch"
+                          ></Video>
+                        );
+                      } else if (e2.mediaType === "photo") {
+                        return (
+                          <Image
+                            key={j}
+                            source={{ uri: e2.uri }}
+                            style={{ flex: 1, width: 100, height: 100 }}
+                            resizeMode="stretch"
+                          />
+                        );
+                      }
+                    }
+                  })}
+                </View>
+              );
+            }
           })}
-        </View>
+        </ScrollView>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
