@@ -3,6 +3,7 @@ import { KeyboardAvoidingView } from "react-native";
 import { WebView } from "react-native-webview";
 import AddCamera from "./components/AddCamera";
 import AddGallery from "./components/AddGallery";
+import Add from "./Add";
 
 const App = () => {
   return (
@@ -16,8 +17,7 @@ const App = () => {
         style={{ marginTop: 24 }}
       />
     </KeyboardAvoidingView> */}
-      {/* <AddCamera /> */}
-      <AddGallery />
+      <Add />
     </>
   );
 };
