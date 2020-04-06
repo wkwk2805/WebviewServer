@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView } from "react-native";
 import { WebView } from "react-native-webview";
-import AddCamera from "./components/AddCamera";
-import AddGallery from "./components/AddGallery";
 import Add from "./Add";
 
 const App = () => {
-  const [showAddView, setShowAddView] = useState(false);
+  return <Add />;
+  /* const [showAddView, setShowAddView] = useState(false);
   const click = (x) => {
     setShowAddView(x);
   };
@@ -23,6 +22,6 @@ const App = () => {
         onMessage={(event) => click(event.nativeEvent.data)}
       />
     </KeyboardAvoidingView>
-  );
+  ); */
 };
 export default App;
