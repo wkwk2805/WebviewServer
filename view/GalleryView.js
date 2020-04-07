@@ -1,16 +1,26 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import AlbumMenu from "../components/GalleryComp/AlbumMenu";
 import SelectedImage from "../components/GalleryComp/SelectedImage";
 import ImageList from "../components/GalleryComp/ImageList";
+import Constants from "expo-constants";
 
 const GalleryView = () => {
   return (
-    <View>
+    <SafeAreaView
+      style={{
+        marginTop: Constants.statusBarHeight,
+        flex: 1,
+      }}
+    >
       <AlbumMenu />
-      <SelectedImage />
-      <ImageList />
-    </View>
+      <View style={{ flex: 1 }}>
+        <SelectedImage />
+      </View>
+      <View style={{ flex: 1 }}>
+        <ImageList />
+      </View>
+    </SafeAreaView>
   );
 };
 

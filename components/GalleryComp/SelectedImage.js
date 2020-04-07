@@ -9,6 +9,7 @@ import {
 } from "expo-media-library";
 import { useSelector, useDispatch } from "react-redux";
 import { setAssetInfo } from "../../modules/asset";
+import { setAssetList } from "../../modules/assetList";
 
 const SelectedImage = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const SelectedImage = () => {
     (async () => {
       const { granted } = await requestPermissionsAsync();
       if (granted) {
-        const option = {
+        let option = {
           first: 1,
           sortBy: SortBy.modificationTime,
         };
@@ -29,7 +30,7 @@ const SelectedImage = () => {
           case "사진":
             option.mediaType = [MediaType.photo];
             break;
-          case "비디오":
+          case "동영상":
             option.mediaType = [MediaType.video];
             break;
           default:
@@ -38,13 +39,21 @@ const SelectedImage = () => {
             break;
         }
         const assetsInfo = await getAssetsAsync(option);
-        console.log(assetsInfo);
         dispatch(setAssetInfo(assetsInfo.assets[0]));
+        // 30개 넣기
+        option.first = 40;
+        const assetList = await getAssetsAsync(option);
+        console.log(assetList.assets);
+        dispatch(
+          setAssetList(
+            assetList.assets.filter((e) => e.filename.indexOf("wmv") === -1)
+          )
+        );
       }
     })();
   }, [album]);
   return (
-    <>
+    <View>
       {asset.mediaType === "photo" ? (
         <Image
           source={{ uri: asset.uri }}
@@ -60,7 +69,7 @@ const SelectedImage = () => {
           isLooping
         />
       )}
-    </>
+    </View>
   );
 };
 

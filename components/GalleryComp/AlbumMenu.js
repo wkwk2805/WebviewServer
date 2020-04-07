@@ -36,7 +36,9 @@ const AlbumMenu = () => {
         album: albumInfo.id,
         mediaType: [MediaType.photo, MediaType.video],
       });
-      if (asset.assets.length === 0) {
+      const len = asset.assets.filter((e) => e.filename.indexOf("wmv") === -1)
+        .length;
+      if (len === 0) {
         Alert.alert("이미지 또는 비디오가 존재하지 않습니다.");
         return;
       }
