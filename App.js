@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView } from "react-native";
 import { WebView } from "react-native-webview";
-import Add from "./Add";
+import rootReducer from "./modules";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import GalleryView from "./view/GalleryView";
+
+const store = createStore(rootReducer);
 
 const App = () => {
-  return <Add />;
+  return (
+    <Provider store={store}>
+      <GalleryView />
+    </Provider>
+  );
   /* const [showAddView, setShowAddView] = useState(false);
   const click = (x) => {
     setShowAddView(x);
