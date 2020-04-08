@@ -14,6 +14,7 @@ import { showLoading } from "../../modules/loading";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { IconButton } from "react-native-paper";
 
 const AlbumMenu = () => {
   const navigation = useNavigation();
@@ -57,7 +58,17 @@ const AlbumMenu = () => {
   };
   return (
     <View>
-      <View style={{ width: "50%", marginLeft: 10 }}>
+      <View style={{ position: "absolute" }}>
+        <IconButton
+          size={25}
+          icon="close"
+          onPress={() => {
+            navigation.navigate("Web");
+            dispatch(removeAllSelectedAsset());
+          }}
+        />
+      </View>
+      <View style={{ width: "50%", marginLeft: 50 }}>
         <Picker selectedValue={album.title} onValueChange={_onValueChange}>
           <Picker.Item label="갤러리" value="갤러리" />
           <Picker.Item label="사진" value="사진" />

@@ -10,10 +10,12 @@ import {
 import { useSelector } from "react-redux";
 import Constants from "expo-constants";
 import { IconButton, RadioButton, Checkbox } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const setScope = ["모두", "친구만", "그룹만", "나만", "친구+그룹만"];
 
 const WriteView = () => {
+  const navigation = useNavigation();
   const { width } = Dimensions.get("window");
   const selectedAssetList = useSelector((s) => s.selectedAssetList);
   return (
@@ -28,7 +30,7 @@ const WriteView = () => {
         <IconButton
           icon="arrow-left"
           size={25}
-          onPress={() => console.log("Pressed")}
+          onPress={() => navigation.goBack()}
         />
         <Text>게시글 입력</Text>
         <View style={{ position: "absolute", right: 0 }}>
@@ -71,8 +73,11 @@ const WriteView = () => {
             justifyContent: "space-between",
           }}
         >
-          {setScope.map((e) => (
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+          {setScope.map((e, i) => (
+            <View
+              style={{ flexDirection: "row", alignItems: "center" }}
+              key={i}
+            >
               <RadioButton value="first" status="checked" />
               <Text>{e}</Text>
             </View>

@@ -15,14 +15,13 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <Provider store={store}>
-      <WriteView />
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Web" component={Web} />
           <Stack.Screen name="Add" component={Add} />
           <Stack.Screen name="Write" component={WriteView} />
         </Stack.Navigator>
-      </NavigationContainer> */}
+      </NavigationContainer>
     </Provider>
   );
 };
