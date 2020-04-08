@@ -40,15 +40,13 @@ const SelectedImage = () => {
         }
         const assetsInfo = await getAssetsAsync(option);
         dispatch(setAssetInfo(assetsInfo.assets[0]));
-        // 30개 넣기
-        option.first = 40;
+        // 400개 넣기
+        option.first = 400;
         const assetList = await getAssetsAsync(option);
-        console.log(assetList.assets);
-        dispatch(
-          setAssetList(
-            assetList.assets.filter((e) => e.filename.indexOf("wmv") === -1)
-          )
-        );
+        const result = assetList.assets
+          .filter((e) => e.filename.indexOf("wmv") === -1)
+          .filter((e) => e.duration <= 300);
+        dispatch(setAssetList(result));
       }
     })();
   }, [album]);

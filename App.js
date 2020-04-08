@@ -5,6 +5,7 @@ import rootReducer from "./modules";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import GalleryView from "./view/GalleryView";
+import Loading from "./components/GalleryComp/Loading";
 
 const store = createStore(rootReducer);
 

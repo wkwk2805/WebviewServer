@@ -1,12 +1,12 @@
-const ASSETLIST = "album/ASSETLIST";
+const ASSET_LIST = "assetList/ASSET_LIST";
 
-export const setAssetList = (assetList) => ({ type: ASSETLIST, assetList });
+export const setAssetList = (assetList) => ({ type: ASSET_LIST, assetList });
 
 const initialState = [];
 
 const assetList = (state = initialState, action) => {
   switch (action.type) {
-    case ASSETLIST:
+    case ASSET_LIST:
       state = action.assetList;
       return state;
     default:

@@ -1,12 +1,12 @@
-const ALBUMINFO = "album/ALBUMINFO";
+const ALBUM_INFO = "album/ALBUM_INFO";
 
-export const setAlbumInfo = (album) => ({ type: ALBUMINFO, album });
+export const setAlbumInfo = (album) => ({ type: ALBUM_INFO, album });
 
 const initialState = {};
 
 const album = (state = initialState, action) => {
   switch (action.type) {
-    case ALBUMINFO:
+    case ALBUM_INFO:
       state = action.album;
       return state;
     default:
