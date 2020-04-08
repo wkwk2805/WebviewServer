@@ -10,6 +10,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { setAssetInfo } from "../../modules/asset";
 import { setAssetList } from "../../modules/assetList";
+import { addSelectedAsset } from "../../modules/selectedAssetList";
 
 const SelectedImage = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const SelectedImage = () => {
       const { granted } = await requestPermissionsAsync();
       if (granted) {
         let option = {
-          first: 1,
+          first: 400,
           sortBy: SortBy.modificationTime,
         };
         switch (album.title) {
@@ -38,11 +39,8 @@ const SelectedImage = () => {
             option.album = album.id;
             break;
         }
-        const assetsInfo = await getAssetsAsync(option);
-        dispatch(setAssetInfo(assetsInfo.assets[0]));
-        // 400개 넣기
-        option.first = 400;
         const assetList = await getAssetsAsync(option);
+        dispatch(setAssetInfo(assetList.assets[0]));
         const result = assetList.assets
           .filter((e) => e.filename.indexOf("wmv") === -1)
           .filter((e) => e.duration <= 300);

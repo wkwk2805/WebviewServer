@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   FlatList,
@@ -20,7 +20,6 @@ const ImageList = () => {
   const asset = useSelector((s) => s.asset);
   useEffect(() => {
     dispatch(hideLoading());
-    console.log(assetList);
   }, [assetList]);
   const changeMinAndSec = (sec) => {
     var minutes = Math.floor(sec / 60);
@@ -34,41 +33,27 @@ const ImageList = () => {
         return (
           <View style={{ width: width / 4, height: 100 }}>
             <NumberCheckbox item={item} />
-            {item.mediaType === "photo" ? (
-              <TouchableOpacity onPress={() => dispatch(setAssetInfo(item))}>
-                <Image
-                  source={{ uri: item.uri }}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    opacity: asset.id === item.id ? 0.3 : 1,
-                  }}
-                  resizeMode="stretch"
-                />
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity onPress={() => dispatch(setAssetInfo(item))}>
-                <Video
-                  source={{ uri: item.uri }}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    opacity: asset.id === item.id ? 0.3 : 1,
-                  }}
-                  resizeMode="stretch"
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
-                    color: "white",
-                  }}
-                >
-                  {changeMinAndSec(item.duration)}
-                </Text>
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity onPress={() => dispatch(setAssetInfo(item))}>
+              <Image
+                source={{ uri: item.uri }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  opacity: asset.id === item.id ? 0.3 : 1,
+                }}
+                resizeMode="stretch"
+              />
+              <Text
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: 0,
+                  color: "white",
+                }}
+              >
+                {item.duration > 0 && changeMinAndSec(item.duration)}
+              </Text>
+            </TouchableOpacity>
           </View>
         );
       }}

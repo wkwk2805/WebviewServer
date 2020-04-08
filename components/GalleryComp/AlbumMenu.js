@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Picker, Alert } from "react-native";
+import { Picker, Alert, View, Text } from "react-native";
 import {
   requestPermissionsAsync,
   getAlbumsAsync,
@@ -11,11 +11,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAlbumInfo } from "../../modules/album";
 import { removeAllSelectedAsset } from "../../modules/selectedAssetList";
 import { showLoading } from "../../modules/loading";
+import { MaterialCommunityIcons } from "react-native-vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 const AlbumMenu = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const album = useSelector((state) => state.album);
   const [albumList, setAlbumList] = useState([]);
+  const selectedAssetList = useSelector((s) => s.selectedAssetList);
   useEffect(() => {
     (async () => {
       const { granted } = await requestPermissionsAsync();
@@ -51,14 +56,28 @@ const AlbumMenu = () => {
     dispatch(setAlbumInfo(albumInfo));
   };
   return (
-    <Picker selectedValue={album.title} onValueChange={_onValueChange}>
-      <Picker.Item label="갤러리" value="갤러리" />
-      <Picker.Item label="사진" value="사진" />
-      <Picker.Item label="동영상" value="동영상" />
-      {albumList.map((e, i) => (
-        <Picker.Item label={e.title} value={e.title} key={i} />
-      ))}
-    </Picker>
+    <View>
+      <View style={{ width: "50%", marginLeft: 10 }}>
+        <Picker selectedValue={album.title} onValueChange={_onValueChange}>
+          <Picker.Item label="갤러리" value="갤러리" />
+          <Picker.Item label="사진" value="사진" />
+          <Picker.Item label="동영상" value="동영상" />
+          {albumList.map((e, i) => (
+            <Picker.Item label={e.title} value={e.title} key={i} />
+          ))}
+        </Picker>
+      </View>
+      {selectedAssetList.length > 0 && (
+        <View style={{ position: "absolute", right: 10, top: 7 }}>
+          <TouchableOpacity onPress={() => navigation.navigate("Write")}>
+            <MaterialCommunityIcons
+              name="check"
+              style={{ fontSize: 30, color: "green" }}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
   );
 };
 

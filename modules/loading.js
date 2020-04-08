@@ -9,7 +9,7 @@ const initialState = false;
 const loading = (state = initialState, action) => {
   switch (action.type) {
     case SHOW_LOADING:
-      state = false;
+      state = true;
       return state;
     case HIDE_LOADING:
       state = false;
