@@ -9,7 +9,9 @@ import { MaterialCommunityIcons } from "react-native-vector-icons";
 const Add = () => {
   const Tab = createBottomTabNavigator();
   return (
-    <Tab.Navigator>
+    <>
+      <GalleryView />
+      {/* <Tab.Navigator>
       <Tab.Screen
         name="갤러리"
         component={GalleryView}
@@ -44,7 +46,8 @@ const Add = () => {
           ),
         }}
       />
-    </Tab.Navigator>
+    </Tab.Navigator> */}
+    </>
   );
 };
 
