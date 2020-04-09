@@ -17,7 +17,7 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator headerMode="none">
-          <Stack.Screen name="Web" component={Web} />
+          {/* <Stack.Screen name="Web" component={Web} /> */}
           <Stack.Screen name="Add" component={Add} />
           <Stack.Screen name="Write" component={WriteView} />
         </Stack.Navigator>

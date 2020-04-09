@@ -10,12 +10,14 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { setAssetInfo } from "../../modules/asset";
 import { setAssetList } from "../../modules/assetList";
-import { addSelectedAsset } from "../../modules/selectedAssetList";
+import { IconButton } from "react-native-paper";
+import { play, stop } from "../../modules/remocon";
 
 const SelectedImage = () => {
   const dispatch = useDispatch();
   const album = useSelector((state) => state.album);
   const asset = useSelector((state) => state.asset);
+  const remocon = useSelector((s) => s.remocon);
   useEffect(() => {
     (async () => {
       const { granted } = await requestPermissionsAsync();
@@ -57,13 +59,32 @@ const SelectedImage = () => {
           resizeMode="contain"
         />
       ) : (
-        <Video
-          source={{ uri: asset.uri }}
-          style={{ width: "100%", height: "100%", backgroundColor: "black" }}
-          resizeMode="contain"
-          shouldPlay
-          isLooping
-        />
+        <>
+          {!remocon ? (
+            <IconButton
+              size={30}
+              color="green"
+              icon="play-circle-outline"
+              style={{ position: "absolute", zIndex: 1, bottom: 0, right: 0 }}
+              onPress={() => dispatch(play())}
+            />
+          ) : (
+            <IconButton
+              size={30}
+              color="red"
+              icon="stop-circle-outline"
+              style={{ position: "absolute", zIndex: 1, bottom: 0, right: 0 }}
+              onPress={() => dispatch(stop())}
+            />
+          )}
+          <Video
+            source={{ uri: asset.uri }}
+            style={{ width: "100%", height: "100%", backgroundColor: "black" }}
+            resizeMode="contain"
+            shouldPlay={remocon}
+            isLooping={remocon}
+          />
+        </>
       )}
     </View>
   );

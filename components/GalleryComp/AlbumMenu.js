@@ -15,6 +15,7 @@ import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { IconButton } from "react-native-paper";
+import { stop } from "../../modules/remocon";
 
 const AlbumMenu = () => {
   const navigation = useNavigation();
@@ -55,6 +56,7 @@ const AlbumMenu = () => {
     dispatch(showLoading());
     dispatch(removeAllSelectedAsset());
     dispatch(setAlbumInfo(albumInfo));
+    dispatch(stop());
   };
   return (
     <View>
@@ -65,6 +67,7 @@ const AlbumMenu = () => {
           onPress={() => {
             navigation.navigate("Web");
             dispatch(removeAllSelectedAsset());
+            dispatch(stop());
           }}
         />
       </View>
@@ -80,7 +83,12 @@ const AlbumMenu = () => {
       </View>
       {selectedAssetList.length > 0 && (
         <View style={{ position: "absolute", right: 10, top: 7 }}>
-          <TouchableOpacity onPress={() => navigation.navigate("Write")}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Write");
+              dispatch(stop());
+            }}
+          >
             <MaterialCommunityIcons
               name="check"
               style={{ fontSize: 30, color: "green" }}
