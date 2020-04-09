@@ -1,12 +1,6 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import React, { useState, useRef } from "react";
+import { View, Text, TextInput, ScrollView, Dimensions } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const TextArea = () => {
   const { width } = Dimensions.get("window");
@@ -57,42 +51,67 @@ const TextArea = () => {
     setInputText(str);
   };
   return (
-    <View style={{ maxHeight: 300, width: width - 130, marginLeft: 10 }}>
-      <TextInput
-        multiline
-        numberOfLines={4}
-        maxLength={40}
-        style={{
-          borderWidth: 1,
-          minHeight: 100,
-          width: "100%",
-        }}
-        placeholder="게시글을 입력해주세요..."
-        onKeyPress={({ nativeEvent }) => {
-          findTagAndUser(nativeEvent.key);
-        }}
-        onChangeText={searchTagAndUser}
-        value={inputText}
-      />
-      {isTagAndUser === "#" && (
-        <ScrollView style={{ height: 100 }}>
-          {Tag.map((e, i) => (
-            <TouchableOpacity onPress={() => selectText(e, "#")} key={i}>
-              <Text>{e}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      )}
-      {isTagAndUser === "@" && (
-        <ScrollView style={{ height: 100 }}>
-          {User.map((e, i) => (
-            <TouchableOpacity onPress={() => selectText(e, "@")} key={i}>
-              <Text>{e}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      )}
-    </View>
+    <>
+      <View style={{ maxHeight: 300, width: width - 130, marginLeft: 10 }}>
+        <TextInput
+          multiline
+          numberOfLines={4}
+          value={inputText}
+          style={{
+            borderWidth: 1,
+            minHeight: 100,
+            width: "100%",
+            paddingLeft: 10,
+            paddingRight: 10,
+          }}
+          placeholder="게시글을 입력해주세요..."
+          onKeyPress={({ nativeEvent }) => {
+            findTagAndUser(nativeEvent.key);
+          }}
+          onChangeText={searchTagAndUser}
+        />
+        <View>
+          {isTagAndUser === "#" && (
+            <ScrollView
+              style={{
+                height: 100,
+                position: "absolute",
+                width: width - 130,
+                backgroundColor: "#dcdcdc",
+                zIndex: 1,
+                borderWidth: 1,
+                borderTop: 0,
+              }}
+            >
+              {Tag.map((e, i) => (
+                <TouchableOpacity onPress={() => selectText(e, "#")} key={i}>
+                  <Text>{e}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          )}
+          {isTagAndUser === "@" && (
+            <ScrollView
+              style={{
+                height: 100,
+                position: "absolute",
+                width: width - 130,
+                backgroundColor: "#dcdcdc",
+                zIndex: 1,
+                borderWidth: 1,
+                borderTop: 0,
+              }}
+            >
+              {User.map((e, i) => (
+                <TouchableOpacity onPress={() => selectText(e, "@")} key={i}>
+                  <Text>{e}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          )}
+        </View>
+      </View>
+    </>
   );
 };
 

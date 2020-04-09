@@ -13,7 +13,7 @@ const WriteView = () => {
   return (
     <ScrollView style={{ marginTop: Constants.statusBarHeight }}>
       <Menu />
-      <View style={{ margin: 10, flexDirection: "row" }}>
+      <View style={{ margin: 10, flexDirection: "row", flexWrap: "wrap" }}>
         <FirstImage />
         <TextArea />
       </View>
