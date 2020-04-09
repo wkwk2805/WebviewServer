@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { RadioButton } from "react-native-paper";
-const setScope = [
+
+const Scopes = [
   { key: "모두", value: "ALL" },
   { key: "친구만", value: "FRIEND" },
   { key: "그룹만", value: "GROUP" },
@@ -20,7 +21,7 @@ const PublicScope = ({ radioCheck, setRadioCheck, setCheckedList }) => {
           justifyContent: "space-between",
         }}
       >
-        {setScope.map((e, i) => (
+        {Scopes.map((e, i) => (
           <View style={{ flexDirection: "row", alignItems: "center" }} key={i}>
             <RadioButton
               value="first"

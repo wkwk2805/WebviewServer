@@ -29,6 +29,9 @@ const AlbumMenu = () => {
       if (granted) {
         const albums = await getAlbumsAsync();
         setAlbumList(albums);
+      } else {
+        Alert.alert("접근권한이 허가 되지 않았습니다.");
+        navigation.navigate("Web");
       }
     })();
   }, []);

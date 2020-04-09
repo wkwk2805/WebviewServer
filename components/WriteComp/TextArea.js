@@ -1,11 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, ScrollView, Dimensions } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useDispatch } from "react-redux";
+import { setContent } from "../../modules/post";
 
 const TextArea = () => {
+  const dispatch = useDispatch();
   const { width } = Dimensions.get("window");
   const [isTagAndUser, setIsTagAndUser] = useState(false);
   const [inputText, setInputText] = useState("");
+  useEffect(() => {
+    dispatch(setContent(inputText));
+  }, [inputText]);
   const [Tag, setTag] = useState([
     "#태그1",
     "#태그2",
@@ -56,6 +62,7 @@ const TextArea = () => {
         <TextInput
           multiline
           numberOfLines={4}
+          maxLength={1000}
           value={inputText}
           style={{
             borderWidth: 1,

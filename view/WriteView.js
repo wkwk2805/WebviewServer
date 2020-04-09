@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import TextArea from "../components/WriteComp/TextArea";
@@ -6,10 +6,17 @@ import GroupList from "../components/WriteComp/GroupList";
 import FirstImage from "../components/WriteComp/FirstImage";
 import Menu from "../components/WriteComp/Menu";
 import PublicScope from "../components/WriteComp/PublicScope";
+import { setGroups, setScope } from "../modules/post";
+import { useDispatch } from "react-redux";
 
 const WriteView = () => {
-  const [radioCheck, setRadioCheck] = useState("");
+  const [radioCheck, setRadioCheck] = useState("ALL");
   const [checkedList, setCheckedList] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setScope(radioCheck));
+    dispatch(setGroups(checkedList));
+  }, [radioCheck, checkedList]);
   return (
     <ScrollView style={{ marginTop: Constants.statusBarHeight }}>
       <Menu />

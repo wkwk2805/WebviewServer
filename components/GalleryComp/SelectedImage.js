@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, View } from "react-native";
+import { Image, View, Alert } from "react-native";
 import { Video } from "expo-av";
 import {
   requestPermissionsAsync,
@@ -12,8 +12,10 @@ import { setAssetInfo } from "../../modules/asset";
 import { setAssetList } from "../../modules/assetList";
 import { IconButton } from "react-native-paper";
 import { play, stop } from "../../modules/remocon";
+import { useNavigation } from "@react-navigation/native";
 
 const SelectedImage = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const album = useSelector((state) => state.album);
   const asset = useSelector((state) => state.asset);
@@ -47,6 +49,9 @@ const SelectedImage = () => {
           .filter((e) => e.filename.indexOf("wmv") === -1)
           .filter((e) => e.duration <= 300);
         dispatch(setAssetList(result));
+      } else {
+        Alert.alert("접근권한이 허가 되지 않았습니다.");
+        navigation.navigate("Web");
       }
     })();
   }, [album]);

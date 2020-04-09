@@ -4,8 +4,8 @@ import { KeyboardAvoidingView } from "react-native";
 import { WebView } from "react-native-webview";
 
 const Web = ({ navigation }) => {
-  const click = (x) => {
-    if (x) navigation.navigate("Add");
+  const click = ({ token }) => {
+    if (token) navigation.navigate("Add");
   };
   return (
     <KeyboardAvoidingView
@@ -13,7 +13,7 @@ const Web = ({ navigation }) => {
       behavior="height"
     >
       <WebView
-        source={{ uri: "http://192.168.25.22:3000" }}
+        source={{ uri: "http://192.168.0.14:3000" }}
         style={{ marginTop: Constants.statusBarHeight }}
         onMessage={(event) => click(event.nativeEvent.data)}
       />
