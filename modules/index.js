@@ -6,6 +6,7 @@ import selectedAssetList from "./selectedAssetList";
 import loading from "./loading";
 import remocon from "./remocon";
 import post from "./post";
+import progress from "./progress";
 
 const rootReducer = combineReducers({
   album,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   loading,
   remocon,
   post,
+  progress,
 });
 
 export default rootReducer;

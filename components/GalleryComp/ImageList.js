@@ -8,7 +8,6 @@ import {
   Text,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { Video } from "expo-av";
 import NumberCheckbox from "./NumberCheckbox";
 import { setAssetInfo } from "../../modules/asset";
 import { hideLoading } from "../../modules/loading";

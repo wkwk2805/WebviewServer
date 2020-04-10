@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  View,
-  ActivityIndicator,
-} from "react-native";
+import { Modal, StyleSheet, View, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { hideLoading } from "../../modules/loading";
 
@@ -15,7 +9,6 @@ const Loading = () => {
   return (
     <View>
       <Modal
-        transparent={true}
         visible={isLoading}
         onRequestClose={() => {
           dispatch(hideLoading());

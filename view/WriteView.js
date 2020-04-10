@@ -8,6 +8,7 @@ import Menu from "../components/WriteComp/Menu";
 import PublicScope from "../components/WriteComp/PublicScope";
 import { setGroups, setScope } from "../modules/post";
 import { useDispatch } from "react-redux";
+import Loading from "../components/GalleryComp/Loading";
 
 const WriteView = () => {
   const [radioCheck, setRadioCheck] = useState("ALL");
@@ -18,21 +19,27 @@ const WriteView = () => {
     dispatch(setGroups(checkedList));
   }, [radioCheck, checkedList]);
   return (
-    <ScrollView style={{ marginTop: Constants.statusBarHeight }}>
-      <Menu />
-      <View style={{ margin: 10, flexDirection: "row", flexWrap: "wrap" }}>
-        <FirstImage />
-        <TextArea />
-      </View>
-      <PublicScope
-        radioCheck={radioCheck}
-        setRadioCheck={setRadioCheck}
-        setCheckedList={setCheckedList}
-      />
-      {(radioCheck === "GROUP" || radioCheck === "PLUS") && (
-        <GroupList checkedList={checkedList} setCheckedList={setCheckedList} />
-      )}
-    </ScrollView>
+    <>
+      <Loading />
+      <ScrollView style={{ marginTop: Constants.statusBarHeight }}>
+        <Menu />
+        <View style={{ margin: 10, flexDirection: "row", flexWrap: "wrap" }}>
+          <FirstImage />
+          <TextArea />
+        </View>
+        <PublicScope
+          radioCheck={radioCheck}
+          setRadioCheck={setRadioCheck}
+          setCheckedList={setCheckedList}
+        />
+        {(radioCheck === "GROUP" || radioCheck === "PLUS") && (
+          <GroupList
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+          />
+        )}
+      </ScrollView>
+    </>
   );
 };
 

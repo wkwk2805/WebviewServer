@@ -18,7 +18,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Web" component={Web} />
-          <Stack.Screen name="Add" component={GalleryView} />
+          <Stack.Screen name="Gallery" component={GalleryView} />
           <Stack.Screen name="Write" component={WriteView} />
         </Stack.Navigator>
       </NavigationContainer>

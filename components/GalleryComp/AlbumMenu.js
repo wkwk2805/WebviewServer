@@ -88,6 +88,7 @@ const AlbumMenu = () => {
         <View style={{ position: "absolute", right: 10, top: 7 }}>
           <TouchableOpacity
             onPress={() => {
+              dispatch(showLoading());
               navigation.navigate("Write");
               dispatch(stop());
             }}

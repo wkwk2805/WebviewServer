@@ -4,7 +4,7 @@ const HIDE_LOADING = "assetList/HIDE_LOADING";
 export const showLoading = () => ({ type: SHOW_LOADING });
 export const hideLoading = () => ({ type: HIDE_LOADING });
 
-const initialState = false;
+const initialState = true;
 
 const loading = (state = initialState, action) => {
   switch (action.type) {
