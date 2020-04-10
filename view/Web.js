@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Constants from "expo-constants";
-import { KeyboardAvoidingView } from "react-native";
+import { KeyboardAvoidingView, AsyncStorage } from "react-native";
 import { WebView } from "react-native-webview";
+import { useDispatch } from "react-redux";
+import { removeAllSelectedAsset } from "../modules/selectedAssetList";
 
 const Web = ({ navigation }) => {
-  const click = ({ token }) => {
+  const dispatch = useDispatch();
+  const click = async (token) => {
+    dispatch(removeAllSelectedAsset());
+    await AsyncStorage.setItem("token", token);
     if (token) navigation.navigate("Add");
   };
   return (

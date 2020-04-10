@@ -6,9 +6,11 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { hideLoading } from "../../modules/loading";
 
 const Loading = () => {
+  const dispatch = useDispatch();
   const isLoading = useSelector((s) => s.loading);
   return (
     <View>
@@ -16,12 +18,12 @@ const Loading = () => {
         transparent={true}
         visible={isLoading}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+          dispatch(hideLoading());
         }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <ActivityIndicator color="white" size="large" />
+            <ActivityIndicator color="#3f51b5" size="large" />
           </View>
         </View>
       </Modal>
