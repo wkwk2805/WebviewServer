@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Axios from "axios";
 import { showLoading, hideLoading } from "../../modules/loading";
 import { host } from "../../host";
-import { setPercent } from "../../modules/progress";
+import { setProgress } from "../../modules/progress";
 
 const Menu = () => {
   useEffect(() => {
@@ -52,7 +52,7 @@ const Menu = () => {
       await axios.put("/post", formData, {
         onUploadProgress: (progress) => {
           const { loaded, total } = progress;
-          dispatch(setPercent(loaded / total));
+          dispatch(setProgress(loaded / total));
           navigation.navigate("Web");
           dispatch(hideLoading());
         },

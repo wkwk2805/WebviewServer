@@ -25,7 +25,7 @@ const SelectedImage = () => {
       const { granted } = await requestPermissionsAsync();
       if (granted) {
         let option = {
-          first: 400,
+          first: 80,
           sortBy: SortBy.modificationTime,
         };
         switch (album.title) {

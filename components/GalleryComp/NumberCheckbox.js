@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addSelectedAsset,
@@ -12,11 +12,18 @@ const NumberCheckbox = ({ item }) => {
   const [checked, setChecked] = useState(false);
   const selectedAssetList = useSelector((s) => s.selectedAssetList);
   const selectCheckbox = (item) => {
-    setChecked(!checked);
-    !checked
-      ? dispatch(addSelectedAsset(item))
-      : dispatch(removeSelectedAsset(item));
-    !checked && dispatch(setAssetInfo(item));
+    if (!checked) {
+      if (selectedAssetList.length >= 10) {
+        Alert.alert("10개까지만 가능합니다");
+        return;
+      }
+      setChecked(!checked);
+      dispatch(setAssetInfo(item));
+      dispatch(addSelectedAsset(item));
+    } else {
+      setChecked(!checked);
+      dispatch(removeSelectedAsset(item));
+    }
   };
   return (
     <TouchableOpacity

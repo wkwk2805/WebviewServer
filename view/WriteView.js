@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, AsyncStorage } from "react-native";
+import { View, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import TextArea from "../components/WriteComp/TextArea";
 import GroupList from "../components/WriteComp/GroupList";
