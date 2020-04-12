@@ -42,7 +42,7 @@ const Web = ({ navigation }) => {
         behavior="height"
       >
         <WebView
-          source={{ uri: "http://172.30.1.6:3000" }}
+          source={{ uri: "http://192.168.25.7:3000" }}
           onMessage={(event) => click(event.nativeEvent.data)}
           style={{ marginTop: Constants.statusBarHeight }}
           renderLoading={() => {

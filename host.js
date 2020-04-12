@@ -1,1 +1,1 @@
-export const host = (name) => name || "http://172.30.1.6";
+export const host = (name) => name || "http://192.168.25.7";

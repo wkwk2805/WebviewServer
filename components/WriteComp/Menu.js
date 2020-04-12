@@ -49,7 +49,7 @@ const Menu = () => {
       formData.append("assets", file);
     }
     try {
-      await axios.put("/post", formData, {
+      const { data } = await axios.put("/post", formData, {
         onUploadProgress: (progress) => {
           const { loaded, total } = progress;
           dispatch(setProgress(loaded / total));
@@ -57,6 +57,9 @@ const Menu = () => {
           dispatch(hideLoading());
         },
       });
+      if (data.success) {
+        Alert.alert(data.message);
+      }
     } catch (error) {
       console.log(error);
     }
