@@ -27,7 +27,8 @@ const Web = ({ navigation }) => {
   };
 
   const [visible, setVisible] = useState(false);
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -42,6 +43,7 @@ const Web = ({ navigation }) => {
         await click(data.token);
         break;
       case "Refresh":
+        setRefresh(data.refresh);
         break;
 
       default:
@@ -65,6 +67,7 @@ const Web = ({ navigation }) => {
       setVisible(true);
     } else {
       setVisible(false);
+      webviewRef.current.reload();
     }
   }, [progress]);
   return (
@@ -73,8 +76,13 @@ const Web = ({ navigation }) => {
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            enabled={refresh}
+          />
         }
+        bounces={refresh}
       >
         <KeyboardAvoidingView
           style={{
