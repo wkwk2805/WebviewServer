@@ -23,7 +23,7 @@ const Menu = () => {
     dispatch(showLoading());
     const token = await AsyncStorage.getItem("token");
     const axios = Axios.create({
-      baseURL: host(),
+      baseURL: host() + ":3001",
       headers: {
         token: token,
       },
