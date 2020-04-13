@@ -67,7 +67,7 @@ const Web = ({ navigation }) => {
       setVisible(true);
     } else {
       setVisible(false);
-      webviewRef.current.reload();
+      progress === 1 && webviewRef.current.reload();
     }
   }, [progress]);
   return (
