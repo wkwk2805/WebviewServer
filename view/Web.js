@@ -100,6 +100,8 @@ const Web = ({ navigation }) => {
             }}
             onLoad={() => dispatch(hideLoading())}
             ref={webviewRef}
+            javaScriptEnabled={true}
+            injectedJavaScript={`window.isMobile=true`}
           />
           {visible && (
             <ProgressBar

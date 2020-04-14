@@ -61,7 +61,7 @@ const Menu = () => {
         Alert.alert(data.message);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   const isValidation = () => {
